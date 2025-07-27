@@ -134,7 +134,7 @@ export default async function ServicesSection() {
         ]
     },
     {
-        "_id": "635b5ba51dafe382a9da8c9a",
+        
         "service_id": "06",
         "title": "Electrical System",
         "img": "https://i.ibb.co/KzCG8qr/8888.jpg",
