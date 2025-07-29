@@ -1,9 +1,10 @@
 // app/components/ServicesSection.jsx or .tsx
-import dbConnect from '@/lib/dbConnect';
+import dbConnect, { collectionNamesObj } from '@/lib/dbConnect';
 import Image from 'next/image';
-
+import Link from 'next/link';
+import {FaArrowRight} from 'react-icons/fa'
 export default async function ServicesSection() {
-  const servicesCollection = await dbConnect("test_services");
+  const servicesCollection = await dbConnect(collectionNamesObj.servicesCollection);
   const services = await servicesCollection.find({}).toArray();
 
   return (
@@ -18,8 +19,15 @@ export default async function ServicesSection() {
         {services.map(service => (
           <div key={service._id} className='col-span-12 md:col-span-6 lg:col-span-4 border border-gray-200 p-4 rounded-lg mt-4 gap-4 bg-base-100'>
             <Image width={300} height={200} src={service.img} alt={service.title} className='mx-auto w-full rounded-lg' />
-            <h2 className='font-bold text-2xl text-[#444444]'>{service.title}</h2>
+            <div className='flex items-center justify-between mt-4'>
+              <div>
+                <h2 className='font-bold text-2xl text-[#444444]'>{service.title}</h2>
             <h3 className='text-[#FF3811] text-xl font-semibold'>Price: ${service.price}</h3>
+              </div>
+              <Link href={`/services/${service._id}`} className='text-[#FF3811]'>
+                <FaArrowRight/>
+              </Link>
+            </div>
           </div>
         ))}
       </div>
