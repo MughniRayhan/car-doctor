@@ -3,6 +3,7 @@ import { MongoClient, ServerApiVersion } from "mongodb";
 
 export const collectionNamesObj = {
      servicesCollection: "test_services",
+     usersCollection: "test_users"
 }
 
 const uri = process.env.MONGODB_URI;
@@ -21,8 +22,6 @@ export default async function dbConnect(collectionName) {
     console.log(" Connected!");
   }
   const db = client.db(process.env.DB_NAME);
-  console.log(" Using DB:", db.databaseName);
   const collection = db.collection(collectionName);
-  console.log(" Using Collection:", collection.collectionName);
   return collection;
 }

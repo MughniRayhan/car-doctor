@@ -48,7 +48,9 @@ export default function NavBar() {
       {navMenu}
     </ul>
   </div>
-  <div className="navbar-end">
+
+  <div className="navbar-end space-x-4">
+    <Link href={'/register'}>Register</Link>
     <a className="btn btn-outline rounded text-[#FF3811] font-semibold">Appointment</a>
   </div>
 </nav>
