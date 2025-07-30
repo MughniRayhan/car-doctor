@@ -1,16 +1,7 @@
+import NextAuthProvider from "@/providers/NextAuthProvider";
 import "./globals.css";
-import { Geist, Geist_Mono } from "next/font/google";
 import NavBar from "@/components/NavBar";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata = {
   title: "Create Next App",
@@ -22,10 +13,12 @@ export default function RootLayout({ children }) {
     <html lang="en" data-theme="light">
       <body
       
-        className={`${geistSans.variable} ${geistMono.variable} antialiased w-7xl mx-auto  min-h-screen`}
+        className={` antialiased w-7xl mx-auto  min-h-screen`}
       >
-        <NavBar/>
+        <NextAuthProvider>
+          <NavBar/>
         {children}
+        </NextAuthProvider>
       </body>
     </html>
   );
