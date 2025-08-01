@@ -53,7 +53,8 @@ export default function NavBar() {
 
   <div className="navbar-end space-x-4">
     { status === 'authenticated' ? (<>
-    <a className='cursor-pointer'  onClick={()=>signOut()}>Logout</a>
+    <Image src={session?.user?.image} alt="user-logo" width={20} height={20}/>
+    <button className='cursor-pointer'  onClick={()=>signOut()}>Logout</button>
     </>) : (
       <>
       <Link href={'/login'}>Login</Link>

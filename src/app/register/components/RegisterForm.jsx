@@ -1,5 +1,6 @@
 "use client";
 import { registerUser } from '@/app/actions/auth/registerUser';
+import SocialLogin from '@/app/login/components/SocialLogin';
 import Link from 'next/link'
 import React from 'react'
 import { FaFacebook, FaGoogle, FaLinkedin } from 'react-icons/fa'
@@ -25,11 +26,7 @@ export default function RegisterForm() {
           <input type="password" className="input" placeholder="Password" name='password'/>
           <button type='submit' className="btn bg-[#FF3811] text-white mt-4 w-80">Sign Up</button>
           <p className='text-center mt-4'>Or Sign Up with</p>
-          <div className='flex items-center justify-center gap-4 mt-4'>
-            <Link href={"https://www.facebook.com/"} className="bg-gray-200 p-4 rounded-full"><FaFacebook/></Link>
-            <Link href={"https://www.google.com/"} className="  bg-gray-200 p-4 rounded-full"><FaGoogle/></Link>
-            <Link href={"https://www.linkedin.com/"} className="bg-gray-200 p-4 rounded-full"><FaLinkedin/></Link>
-          </div>
+          <SocialLogin/>
         </fieldset>
       </form>
   )
