@@ -22,6 +22,9 @@ export default function NavBar() {
     <li>
         <Link href={'/contact'}>Contact</Link>
     </li>
+    <li>
+        <Link href={'/mybookings'}>My Bookings</Link>
+    </li>
     </>
   return (
     <nav className="navbar bg-base-100 ">
@@ -48,6 +51,7 @@ export default function NavBar() {
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1 text-lg font-semibold text-[#444444]">
       {navMenu}
+      
     </ul>
   </div>
 

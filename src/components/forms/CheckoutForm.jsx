@@ -1,29 +1,68 @@
+"use client";
+import { useSession } from 'next-auth/react';
 import React from 'react'
 
-export default function CheckoutForm() {
+export default  function CheckoutForm({data}) {
+  const handleServiceBooking = async(e) =>{
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const phone = form.phone.value;
+    const address = form.address.value;
+    const amount = form.amount.value;
+    const date = form.date.value;
+   
+    const bookingPayload = {
+      customerName : name,
+      email,
+
+      date,
+      phone,
+      address,
+
+      service_id : data._id,
+      service_name : data.title,
+      service_img : data.img,
+      service_price : data.price,
+
+    }
+   console.log(bookingPayload);
+   const res =await fetch("http://localhost:3000/api/service",{
+    method: "POST",
+    body: JSON.stringify(bookingPayload)
+   })
+   const postedRes = await res.json();
+   console.log("Posted data: ", postedRes)
+  }
+  const {data: session} = useSession();
   return (
     <div className='mt-20'>
-        <h2 className='font-semibold mb-5 text-3xl text-center'>Book Service</h2>
-      <form className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg grid grid-cols-1 md:grid-cols-2 gap-6">
+        <h2 className='font-semibold mb-5 text-3xl text-center'>Book Service: {data?.title}</h2>
+      <form onSubmit={handleServiceBooking} className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg grid grid-cols-1 md:grid-cols-2 gap-6">
   {/* Left Column */}
   <div className="space-y-4">
     <div>
       <label className="block text-gray-700 font-medium mb-1">Name</label>
       <input
+      defaultValue={session?.user.name}
         type="text"
         name="name"
         className="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-orange-400"
         placeholder="Enter your name"
+        readOnly
       />
     </div>
 
     <div>
       <label className="block text-gray-700 font-medium mb-1">Email</label>
       <input
+      defaultValue={session?.user.email}
         type="email"
         name="email"
         className="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-orange-400"
         placeholder="Enter your email"
+        readOnly
       />
     </div>
 
@@ -52,6 +91,7 @@ export default function CheckoutForm() {
     <div>
       <label className="block text-gray-700 font-medium mb-1">Due Amount</label>
       <input
+      defaultValue={data?.price}
         type="number"
         name="amount"
         className="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-orange-400"
