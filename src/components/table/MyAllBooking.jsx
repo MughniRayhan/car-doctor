@@ -1,10 +1,13 @@
-"use client";
+
+import DeleteBookingsButton from '@/app/mybookings/components/DeleteBookingsButton';
 import Image from 'next/image';
 import React from 'react'
 import { FaRegEdit } from 'react-icons/fa';
-import {MdDelete} from 'react-icons/md'
 
 export default function MyAllBooking({data}) {
+  if (!Array.isArray(data)) {
+    return <div>No bookings found.</div>;
+  }
   return (
     <div>
       <h2 className='font-semibold mt-8 mb-5 text-3xl text-center'>My All Bookings</h2>
@@ -23,7 +26,8 @@ export default function MyAllBooking({data}) {
           </thead>
           <tbody>
       
-              {data?.map((item)=>{
+              {
+              data.map((item)=>{
                  return (
                     <tr key={item._id}>
               <td>
@@ -36,11 +40,12 @@ export default function MyAllBooking({data}) {
                 <FaRegEdit/>
               </td>
               <td>
-                <MdDelete/>
+                <DeleteBookingsButton id={item._id}/>
               </td>
             </tr>
                  )
-              })}
+              })
+              }
             
             
           </tbody>
