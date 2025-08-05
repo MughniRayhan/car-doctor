@@ -1,8 +1,10 @@
 "use client";
 import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import React from 'react'
 
 export default  function BookingUpdateForm({data}) {
+  const router = useRouter();
   const handleServiceBooking = async(e) =>{
     e.preventDefault();
     const form = e.target;
@@ -25,12 +27,13 @@ export default  function BookingUpdateForm({data}) {
 
     }
    console.log(bookingPayload);
-   const res =await fetch("http://localhost:3000/api/service",{
-    method: "POST",
+   const res =await fetch(`http://localhost:3000/api/mybookings/${data._id}`,{
+    method: "PATCH",
     body: JSON.stringify(bookingPayload)
    })
    const postedRes = await res.json();
    console.log("updated data: ", postedRes)
+  router.push("/mybookings")
   }
   const {data: session} = useSession();
   return (
