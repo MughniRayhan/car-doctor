@@ -13,25 +13,22 @@ export default  function BookingUpdateForm({data}) {
     const date = form.date.value;
    
     const bookingPayload = {
-      // customerName : name,
-      // email,
-
       date,
       phone,
       address,
-
-      // service_id : data._id,
-      // service_name : data.title,
-      // service_img : data.img,
-      // service_price : data.price,
-
     }
    console.log(bookingPayload);
-   const res =await fetch(`http://localhost:3000/api/mybookings/${data._id}`,{
+   const res =await fetch(`http://localhost:3000/api/mybookings/${data?._id}`,{
     method: "PATCH",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(bookingPayload)
    })
-   const postedRes = await res.json();
+   let postedRes = null;
+try {
+  postedRes = await res.json();
+} catch {
+  postedRes = null;
+}
    console.log("updated data: ", postedRes)
   router.push("/mybookings")
   }
