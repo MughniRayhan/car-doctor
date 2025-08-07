@@ -1,9 +1,7 @@
 "use client";
 import { registerUser } from '@/app/actions/auth/registerUser';
 import SocialLogin from '@/app/login/components/SocialLogin';
-import Link from 'next/link'
 import React from 'react'
-import { FaFacebook, FaGoogle, FaLinkedin } from 'react-icons/fa'
 
 export default function RegisterForm() {
   const handleSubmit = async(event) => {
